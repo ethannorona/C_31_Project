@@ -5,6 +5,8 @@ const Bodies = Matter.Bodies;
 var engine, world;
 var thunder, thunder1, thunder2, thunder3, thunder4;
 
+var thunderCreatedFrame;
+
 var umbrella;
 
 var maxDrops = 100;
@@ -22,6 +24,12 @@ function setup(){
    engine = Engine.create();
    world = engine.world;
 
+   if(frameCount % 150 === 0){
+    for(var i = 0; i < maxDrops; i++){
+            drops.push(new Drops(random(0, 400), random(0, 400)));
+        }
+   }
+
    umbrella = new Umbrella(225, 500);
 }
 
@@ -30,8 +38,11 @@ function draw(){
 
     Engine.update(engine);
 
+    if(thunderCreatedFrame % 12 === 0){
+        thunder.destroy();
+    }
+
     for(var i = 0; i < maxDrops; i++){
-        drops.push(new Drops(random(0, 400), random(0, 400)));
         drops[i].showDrop();
         drops[i].updateY();
     }
@@ -60,9 +71,5 @@ function thunderBolt(){
                 break;
         }
         thunder.scale = random(0.3, 0.6);
-        /*if(thunderCreatedFrame % 12 === 0){
-            thunder.lifetime = 3;
-        }*/
-        thunder.lifetime = 10;
     }
 }
