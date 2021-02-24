@@ -7,7 +7,7 @@ var thunder, thunder1, thunder2, thunder3, thunder4;
 
 var umbrella;
 
-var maxDrops = 20;
+var maxDrops = 100;
 var drops = [];
 
 function preload(){
